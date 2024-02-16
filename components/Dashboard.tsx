@@ -1,15 +1,14 @@
 import Image from "next/image";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { Input } from "./ui/input";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import ToggleTheme from "./ToggleTheme";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -130,6 +129,7 @@ function Sidebar({ className }: { className: string }) {
 function MainNav({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
   return (
     <div className="pr-5 flex items-center justify-end space-x-4 h-16">
+      <ToggleTheme />
       <Search />
       <UserNav />
     </div>
