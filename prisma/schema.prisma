@@ -20,9 +20,9 @@ model Class {
 }
 
 model Instructor {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  phone String
-  email String
-  Class Class[]
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  phone   String
+  email   String
+  classes Class[]
 }

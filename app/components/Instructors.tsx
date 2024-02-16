@@ -28,7 +28,7 @@ export default function Instructors() {
           ))}
         </div>
       ) : (
-        <p>No Classes yet</p>
+        <p>No Instructors</p>
       )}
     </div>
   );
