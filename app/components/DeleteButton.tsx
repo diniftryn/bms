@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
 
-import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Button, useDisclosure, useToast, AlertIcon } from "@chakra-ui/react";
+import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Button, useDisclosure, useToast } from "@chakra-ui/react";
 import React from "react";
 
 type DeleteButtonProps = {

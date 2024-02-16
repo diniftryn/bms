@@ -1,8 +1,8 @@
 "use client";
-import DeleteClassButton from "@/app/components/DeleteClassButton";
 import { BASE_URL } from "@/config";
 import { GET_CLASS } from "@/graphql/queries/classQueries";
 import { useQuery } from "@apollo/client";
+import { Button } from "@chakra-ui/react";
 import Link from "next/link";
 
 type Props = {
@@ -20,11 +20,7 @@ export default function Class({ params: { id } }: Props) {
   return (
     <>
       {!loading && !error && (
-        <div className="mx-auto w-75 card p-5">
-          <Link href="/" className="border-b border-b-black">
-            Back
-          </Link>
-
+        <div className="p-5 gap-10">
           <p className="text-xl font-semibold py-5">{data.class.name}</p>
           <p>{data.class.description}</p>
 
@@ -33,7 +29,9 @@ export default function Class({ params: { id } }: Props) {
 
           <InstructorInfo instructor={data.class.instructor} />
 
-          <Link href={`${BASE_URL}/class/${id}/edit`}>Edit</Link>
+          <Link href={`${BASE_URL}/class/${id}/edit`}>
+            <Button colorScheme="blue">Edit</Button>
+          </Link>
         </div>
       )}
     </>
@@ -42,11 +40,10 @@ export default function Class({ params: { id } }: Props) {
 
 function InstructorInfo({ instructor }: { instructor: { name: string; phone: string; email: string } }) {
   return (
-    <div>
-      <h1>Class Instructor: {instructor?.name}</h1>
-      <h2>
-        {instructor?.phone} {instructor?.email}
-      </h2>
+    <div className="py-5">
+      <p>Class Instructor: {instructor?.name}</p>
+      <p>Phone: {instructor?.phone}</p>
+      <p>Email: {instructor?.email}</p>
     </div>
   );
 }

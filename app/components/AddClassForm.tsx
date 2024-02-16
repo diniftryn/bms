@@ -3,12 +3,14 @@ import { ADD_CLASS } from "@/graphql/mutations/classMutations";
 import { GET_CLASSES } from "@/graphql/queries/classQueries";
 import { GET_INSTRUCTORS } from "@/graphql/queries/instructorQueries";
 import { useMutation, useQuery } from "@apollo/client";
-import { Button, Input, Select, Textarea } from "@chakra-ui/react";
+import { Button, Input, Select, Textarea, useToast } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
 export default function AddClassForm() {
   const router = useRouter();
+  const toast = useToast();
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [instructorId, setInstructorId] = useState("");
@@ -26,13 +28,33 @@ export default function AddClassForm() {
       return alert("Please fill in all fields");
     }
 
-    addClass({ variables: { name, description, instructorId, status } }).then(() => {
-      setName("");
-      setDescription("");
-      setStatus("new");
-      setInstructorId("");
-      router.push("/");
+    const promise = addClass({ variables: { name, description, instructorId, status } });
+
+    toast.promise(promise, {
+      success: {
+        title: "Successful",
+        description: `Class successfully added.`,
+        duration: 2000,
+        isClosable: true
+      },
+      error: {
+        title: "Error",
+        description: `Could not add Class.`,
+        duration: 2000,
+        isClosable: true
+      },
+      loading: {
+        title: `Adding class...`,
+        description: "Please do not close the page.",
+        isClosable: false
+      }
     });
+
+    setName("");
+    setDescription("");
+    setStatus("new");
+    setInstructorId("");
+    router.push("/");
   };
 
   const { loading, error, data } = useQuery(GET_INSTRUCTORS);

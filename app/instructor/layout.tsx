@@ -7,7 +7,9 @@ export default function ClassLayout({
 }>) {
   return (
     <div>
-      <Link href="/">Back</Link>
+      <Link href="/" className="border-b border-b-black">
+        Back
+      </Link>
       {children}
     </div>
   );
