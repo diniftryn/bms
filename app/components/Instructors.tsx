@@ -11,16 +11,18 @@ export default function Instructors() {
   if (error) return <p>Something Went Wrong. Error: {error.message}</p>;
 
   return (
-    <div>
+    <div className="p-5">
+      <h1>Our Instructors</h1>
+      <p>All our instructors are highly skilled and have more than 5 years of experience in skateboarding.</p>
+
       {data?.instructors.length > 0 ? (
         <div>
           {data.instructors.map(({ id, name, phone, email }: { id: string; name: string; phone: string; email: string }) => (
             <div key={id}>
-              <p>{id}</p>
-              <p>{name}</p>
-              <p>{phone}</p>
+              <p>Name of Instructor: {name}</p>
+              <p>Phone: {phone}</p>
 
-              <p>{email}</p>
+              <p>Email: {email}</p>
 
               <DeleteInstructorButton instructorId={id} />
             </div>
