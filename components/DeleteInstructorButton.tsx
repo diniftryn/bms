@@ -3,6 +3,7 @@ import { DELETE_INSTRUCTOR } from "@/graphql/mutations/instructorMutations";
 import { GET_INSTRUCTORS } from "@/graphql/queries/instructorQueries";
 import { useMutation } from "@apollo/client";
 import { MouseEventHandler } from "react";
+import { Button } from "./ui/button";
 
 export default function DeleteInstructorButton({ instructorId }: { instructorId: string }) {
   const [deleteInstructor] = useMutation(DELETE_INSTRUCTOR, {
