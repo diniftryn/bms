@@ -3,7 +3,11 @@ import { ADD_INSTRUCTOR } from "@/graphql/mutations/instructorMutations";
 import { GET_INSTRUCTORS } from "@/graphql/queries/instructorQueries";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/navigation";
+
 import React, { FormEvent, useState } from "react";
+import { Button } from "./ui/button";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 
 export default function AddInstructorForm() {
   const router = useRouter();
@@ -34,17 +38,17 @@ export default function AddInstructorForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 gap-2">
-        <label>Name</label>
-        <input className="border" type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
+        <Label>Name</Label>
+        <Input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
 
-        <label>Phone</label>
-        <input className="border" type="text" id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
+        <Label>Phone</Label>
+        <Input type="text" id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
 
-        <label>Email</label>
-        <input className="border" type="text" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <Label>Email</Label>
+        <Input type="text" id="email" value={email} onChange={e => setEmail(e.target.value)} />
       </div>
 
-      <button type="submit">Submit</button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 }

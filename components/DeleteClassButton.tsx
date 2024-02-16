@@ -3,6 +3,7 @@ import { DELETE_CLASS } from "@/graphql/mutations/classMutations";
 import { GET_CLASSES } from "@/graphql/queries/classQueries";
 import { useMutation } from "@apollo/client";
 import { MouseEventHandler } from "react";
+import { Button } from "./ui/button";
 
 // import { AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent, AlertDialogOverlay, Button, useDisclosure, useToast, AlertIcon } from "@chakra-ui/react";
 
@@ -35,7 +36,9 @@ export default function DeleteClassButton({ classId }: { classId: string }) {
   };
 
   return (
-    <button onClick={handleDelete}>Delete Class</button>
+    <Button variant="destructive" onClick={handleDelete}>
+      Delete Class
+    </Button>
     // <>
     //   <Button colorScheme="red" onClick={onOpen}>
     //     Delete Class

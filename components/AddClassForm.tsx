@@ -6,6 +6,12 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
+import { Input } from "@/components/ui/input";
+import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "./ui/button";
+
 export default function AddClassForm() {
   const router = useRouter();
   const [name, setName] = useState("");
@@ -43,32 +49,39 @@ export default function AddClassForm() {
       {!loading && !error && (
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-2">
-            <label>Name</label>
-            <input className="border" type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
+            <Label>Name</Label>
+            <Input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
 
-            <label>Description</label>
-            <textarea className="border" id="description" value={description} onChange={e => setDescription(e.target.value)}></textarea>
+            <Label>Description</Label>
+            <Textarea id="description" value={description} onChange={e => setDescription(e.target.value)}></Textarea>
 
-            <label>Status</label>
-            <select className="border" id="status" value={status} onChange={e => setStatus(e.target.value)}>
-              <option value="new">Coming Soon</option>
-              <option value="enrolment">Enrolment</option>
-              <option value="progress">In Progress</option>
-              <option value="completed">Completed</option>
-            </select>
+            <Label>Status</Label>
+            <Select value={status} onValueChange={e => setStatus(e.valueOf)}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="new">Coming Soon</SelectItem>
+                  <SelectItem value="enrolment">Enrolment</SelectItem>
+                  <SelectItem value="progress">In Progress</SelectItem>
+                  <SelectItem value="completed">Completed</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
 
-            <label>Instructor</label>
-            <select className="border" id="instructorId" value={instructorId} onChange={e => setInstructorId(e.target.value)}>
-              <option value="">Select Instructor</option>
+            <Label>Instructor</Label>
+            {/* <select className="border" id="instructorId" value={instructorId} onChange={e => setInstructorId(e.target.value)}>
+              <SelectItem value="">Select Instructor</SelectItem>
               {data.instructors.map((instructor: { id: string; name: string }) => (
-                <option key={instructor.id} value={instructor.id}>
+                <SelectItem key={instructor.id} value={instructor.id}>
                   {instructor.name}
-                </option>
+                </SelectItem>
               ))}
-            </select>
+            </select> */}
           </div>
 
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
         </form>
       )}
     </div>

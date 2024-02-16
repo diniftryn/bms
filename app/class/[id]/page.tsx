@@ -1,5 +1,5 @@
 "use client";
-import DeleteClassButton from "@/app/components/DeleteClassButton";
+import { Button } from "@/components/ui/button";
 import { BASE_URL } from "@/config";
 import { GET_CLASS } from "@/graphql/queries/classQueries";
 import { useQuery } from "@apollo/client";
@@ -20,12 +20,8 @@ export default function Class({ params: { id } }: Props) {
   return (
     <>
       {!loading && !error && (
-        <div className="mx-auto w-75 card p-5">
-          <Link href="/" className="border-b border-b-black">
-            Back
-          </Link>
-
-          <p className="text-xl font-semibold py-5">{data.class.name}</p>
+        <div className="mx-auto w-75 card">
+          <p className="text-xl font-semibold">{data.class.name}</p>
           <p>{data.class.description}</p>
 
           <p className="">Class Status</p>
@@ -33,7 +29,9 @@ export default function Class({ params: { id } }: Props) {
 
           <InstructorInfo instructor={data.class.instructor} />
 
-          <Link href={`${BASE_URL}/class/${id}/edit`}>Edit</Link>
+          <Button asChild>
+            <Link href={`${BASE_URL}/class/${id}/edit`}>Edit</Link>
+          </Button>
         </div>
       )}
     </>

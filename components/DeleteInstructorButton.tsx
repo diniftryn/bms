@@ -20,5 +20,9 @@ export default function DeleteInstructorButton({ instructorId }: { instructorId:
     });
   };
 
-  return <button onClick={handleDelete}>Delete Instructor</button>;
+  return (
+    <Button variant="destructive" onClick={handleDelete}>
+      Delete Instructor
+    </Button>
+  );
 }

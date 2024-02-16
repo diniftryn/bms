@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CLASSES } from "@/graphql/queries/classQueries";
 import Link from "next/link";
 import DeleteClassButton from "./DeleteClassButton";
+import { Button } from "./ui/button";
 
 export default function Classes() {
   const { loading, error, data } = useQuery(GET_CLASSES);
@@ -22,7 +23,9 @@ export default function Classes() {
 
               <p>{status}</p>
 
-              <Link href={`${BASE_URL}/class/${id}`}>View</Link>
+              <Button asChild>
+                <Link href={`${BASE_URL}/class/${id}`}>View</Link>
+              </Button>
 
               <DeleteClassButton classId={id} />
             </div>
