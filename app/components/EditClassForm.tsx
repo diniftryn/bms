@@ -33,7 +33,7 @@ export default function EditClassForm({ id }: { id: string }) {
     refetchQueries: [{ query: GET_CLASS, variables: { id: skatingClass.id } }]
   });
 
-  const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!name || !description || !status) {
