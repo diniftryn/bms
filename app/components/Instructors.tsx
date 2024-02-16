@@ -1,9 +1,8 @@
 "use client";
-import { BASE_URL } from "@/config";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { GET_INSTRUCTORS } from "@/graphql/queries/instructorQueries";
-import Link from "next/link";
-import DeleteInstructorButton from "./DeleteInstructorButton";
+import { DELETE_INSTRUCTOR } from "@/graphql/mutations/instructorMutations";
+import DeleteButton from "./DeleteButton";
 
 export default function Instructors() {
   const { loading, error, data } = useQuery(GET_INSTRUCTORS);
@@ -32,4 +31,13 @@ export default function Instructors() {
       )}
     </div>
   );
+}
+
+function DeleteInstructorButton({ instructorId }: { instructorId: string }) {
+  const [deleteInstructor] = useMutation(DELETE_INSTRUCTOR, {
+    variables: { id: instructorId },
+    refetchQueries: [{ query: GET_INSTRUCTORS }]
+  });
+
+  return <DeleteButton name={["instructor", "Instructor"]} deletePromise={deleteInstructor} deleteId={instructorId} />;
 }
