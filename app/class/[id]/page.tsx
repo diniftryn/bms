@@ -1,4 +1,5 @@
 "use client";
+import DeleteClassButton from "@/components/DeleteClassButton";
 import { Button } from "@/components/ui/button";
 import { BASE_URL } from "@/config";
 import { GET_CLASS } from "@/graphql/queries/classQueries";
@@ -20,31 +21,27 @@ export default function Class({ params: { id } }: Props) {
   return (
     <>
       {!loading && !error && (
-        <div className="mx-auto w-75 card">
-          <p className="text-xl font-semibold">{data.class.name}</p>
-          <p>{data.class.description}</p>
+        <section>
+          <h1>{data.class.name}</h1>
+          <h2>{data.class.description}</h2>
 
-          <p className="">Class Status</p>
-          <p className="">{data.class.status}</p>
+          <p>Class Status: {data.class.status}</p>
 
-          <InstructorInfo instructor={data.class.instructor} />
+          <p>Class Instructor: {data.class.instructor.name}</p>
 
-          <Button asChild>
-            <Link href={`${BASE_URL}/class/${id}/edit`}>Edit</Link>
-          </Button>
-        </div>
+          <div className="py-5 flex gap-x-2 mb-10">
+            <Button asChild>
+              <Link href={`${BASE_URL}/class/${id}/edit`}>Edit</Link>
+            </Button>
+            <DeleteClassButton classId={id} />
+          </div>
+
+          <div className="bg-purple-100 p-5">
+            <h2>Have Questions about this class?</h2>
+            <Link href="/">Email Instructor here</Link>
+          </div>
+        </section>
       )}
     </>
-  );
-}
-
-function InstructorInfo({ instructor }: { instructor: { name: string; phone: string; email: string } }) {
-  return (
-    <div>
-      <h1>Class Instructor: {instructor?.name}</h1>
-      <h2>
-        {instructor?.phone} {instructor?.email}
-      </h2>
-    </div>
   );
 }
