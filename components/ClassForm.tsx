@@ -12,7 +12,7 @@ import { Textarea } from "./ui/textarea";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "./ui/button";
 
-export default function AddClassForm() {
+export default function ClassForm() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -56,19 +56,24 @@ export default function AddClassForm() {
             <Textarea id="description" value={description} onChange={e => setDescription(e.target.value)}></Textarea>
 
             <Label>Status</Label>
-            <Select value={status} onValueChange={e => setStatus(e.valueOf)}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectItem value="Coming Soon">Coming Soon</SelectItem>
-                  <SelectItem value="Enrolment">Enrolment</SelectItem>
-                  <SelectItem value="In Progress">In Progress</SelectItem>
-                  <SelectItem value="Completed">Completed</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <select value={status} onChange={e => setStatus(e.target.value)}>
+              <Select value={status}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select Status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="Coming Soon">
+                      <option value="Coming Soon">Coming Soon</option>
+                    </SelectItem>
+
+                    <SelectItem value="Enrolment">Enrolment</SelectItem>
+                    <SelectItem value="In Progress">In Progress</SelectItem>
+                    <SelectItem value="Completed">Completed</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </select>
 
             <Label>Instructor</Label>
             {/* <select className="border" id="instructorId" value={instructorId} onChange={e => setInstructorId(e.target.value)}>

@@ -4,6 +4,7 @@ import { GET_CLASS } from "@/graphql/queries/classQueries";
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
+import { Input } from "./ui/input";
 
 export default function EditClassForm({ id }: { id: string }) {
   const router = useRouter();
@@ -13,20 +14,21 @@ export default function EditClassForm({ id }: { id: string }) {
 
   const [name, setName] = useState(skatingClass.name);
   const [description, setDescription] = useState(skatingClass.description);
-  const [status, setStatus] = useState(() => {
-    switch (skatingClass.status) {
-      case "new":
-        return "Coming Soon";
-      case "progress":
-        return "In Progress";
-      case "enrolment":
-        return "Enrolment";
-      case "completed":
-        return "Completed";
-      default:
-        throw new Error(`Unknown status: ${skatingClass.status}`);
-    }
-  });
+  const [status, setStatus] = useState(skatingClass.status);
+  // const [status, setStatus] = useState(() => {
+  //   switch (skatingClass.status) {
+  //     case "new":
+  //       return "Coming Soon";
+  //     case "progress":
+  //       return "In Progress";
+  //     case "enrolment":
+  //       return "Enrolment";
+  //     case "completed":
+  //       return "Completed";
+  //     default:
+  //       throw new Error(`Unknown status: ${skatingClass.status}`);
+  //   }
+  // });
 
   const [updateClass] = useMutation(UPDATE_CLASS, {
     variables: { id: skatingClass.id, name, description, status },
@@ -54,19 +56,19 @@ export default function EditClassForm({ id }: { id: string }) {
     <>
       {!loading && !error && (
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="grid">
             <label>Name</label>
-            <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
+            <Input type="text" id="name" value={name} onChange={e => setName(e.target.value)} />
 
             <label>Description</label>
             <textarea id="description" value={description} onChange={e => setDescription(e.target.value)}></textarea>
 
             <label>Status</label>
             <select id="status" value={status} onChange={e => setStatus(e.target.value)}>
-              <option value="new">Coming Soon</option>
-              <option value="enrolment">Enrolment</option>
-              <option value="progress">In Progress</option>
-              <option value="completed">Completed</option>
+              <option value="Coming Soon">Coming Soon</option>
+              <option value="Enrolment">Enrolment</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
             </select>
           </div>
 
