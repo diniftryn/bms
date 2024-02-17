@@ -19,7 +19,10 @@ export default function Sidebar({ className }: { className: string }) {
         </div>
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">Instructors</h2>
-          <div className="space-y-1"></div>
+          <div className="space-y-1">
+            <SidebarItem icon={<LayersIcon className="mr-2 h-4 w-4" />} name="View All Instructors" path={`${BASE_URL}/instructor/`} />
+            <SidebarItem icon={<PlusIcon className="mr-2 h-4 w-4" />} name="New Instructor" path={`${BASE_URL}/instructor/new`} />
+          </div>
         </div>
       </div>
     </div>

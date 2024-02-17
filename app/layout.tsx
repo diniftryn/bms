@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Skateboarding Academy",
-  description: "Book and manage your classes at the Skateboarding Academy"
+  description: "Book a class and start skating with us at Skateboarding Academy"
 };
 
 export default function RootLayout({
