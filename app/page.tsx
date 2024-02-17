@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Classes from "./components/Classes";
+import Classes from "../components/Classes";
 import { BASE_URL } from "@/config";
-import Instructors from "./components/Instructors";
+import Instructors from "../components/Instructors";
 
 export default function Home() {
   return (

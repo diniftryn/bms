@@ -1,5 +1,5 @@
 "use client";
-import DeleteClassButton from "@/app/components/DeleteClassButton";
+import DeleteClassButton from "@/components/DeleteClassButton";
 import { BASE_URL } from "@/config";
 import { GET_CLASS } from "@/graphql/queries/classQueries";
 import { useQuery } from "@apollo/client";

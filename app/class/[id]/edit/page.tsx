@@ -1,4 +1,4 @@
-import EditClassForm from "@/app/components/EditClassForm";
+import EditClassForm from "@/components/EditClassForm";
 import React from "react";
 
 type Props = {

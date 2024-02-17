@@ -1,4 +1,4 @@
-import AddClassForm from "@/app/components/AddClassForm";
+import AddClassForm from "@/components/AddClassForm";
 import React from "react";
 
 export default function NewClass() {
