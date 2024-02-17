@@ -6,6 +6,8 @@ import Link from "next/link";
 import DeleteClassButton from "./DeleteClassButton";
 import { Button } from "./ui/button";
 
+type ClassProps = { id: string; name: string; status: string };
+
 export default function Classes() {
   const { loading, error, data } = useQuery(GET_CLASSES);
 
@@ -14,26 +16,54 @@ export default function Classes() {
 
   return (
     <div>
+      <h1>Available Classes</h1>
+
       {data?.classes.length > 0 ? (
-        <div>
-          {data.classes.map(({ id, name, description, status }: { id: string; name: string; description: string; status: string }) => (
-            <div key={id}>
-              <h3>{name}</h3>
-              <p>{description}</p>
-
-              <p>{status}</p>
-
-              <Button asChild>
-                <Link href={`${BASE_URL}/class/${id}`}>View</Link>
-              </Button>
-
-              <DeleteClassButton classId={id} />
-            </div>
+        <div className="grid gap-y-5">
+          {data.classes.map(({ id, name, status }: ClassProps) => (
+            <ClassCard id={id} name={name} status={status} />
           ))}
         </div>
       ) : (
         <p>No Classes yet</p>
       )}
     </div>
+  );
+}
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+
+function ClassCard({ id, name, status }: ClassProps) {
+  let badgeColour = "bg-blue-600";
+
+  switch (status) {
+    case "new":
+      badgeColour = "bg-green-100 border border-green-600 text-green-600";
+      break;
+    case "enrolment":
+      badgeColour = "bg-amber-100 border border-amber-600 text-amber-600";
+      break;
+    default:
+      break;
+  }
+
+  return (
+    <Card key={id}>
+      <CardHeader>
+        <CardTitle>{name}</CardTitle>
+        <CardDescription>
+          <p className={`rounded-3xl hover:none ${badgeColour} max-w-20 text-center text-md`}>{status}</p>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Button asChild>
+          <Link href={`${BASE_URL}/class/${id}`}>View</Link>
+        </Button>
+      </CardContent>
+      <CardFooter>
+        <DeleteClassButton classId={id} />
+      </CardFooter>
+    </Card>
   );
 }
